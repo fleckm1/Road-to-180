@@ -1,10 +1,23 @@
 {
   "name": "Road to 180",
-  "short_name": "Road180",
+  "short_name": "Road to 180",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f7f1e8",
   "theme_color": "#788f78",
-  "icons": []
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }

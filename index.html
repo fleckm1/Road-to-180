@@ -15,8 +15,8 @@ body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,
 .inspiration img{display:block;width:100%;height:auto;border-radius:24px;box-shadow:0 8px 26px #00000018}
 .brand{max-width:760px;margin:auto;padding:18px 20px 13px}
 h1{font-size:36px;margin:0 0 4px}.tagline{font-size:19px;font-weight:800;margin:0}.sub{color:#5d675f;margin:5px 0 0;font-weight:650}
-nav{position:sticky;top:0;z-index:20;background:rgba(247,241,232,.98);display:flex;gap:7px;padding:10px 12px;overflow-x:auto;border-top:1px solid #eee7dc;border-bottom:1px solid var(--line);-webkit-overflow-scrolling:touch}
-nav button{white-space:nowrap;border:0;border-radius:22px;padding:11px 15px;background:#fff;color:var(--ink);font-weight:750;font-size:15px}
+nav{position:sticky;top:0;z-index:20;background:rgba(247,241,232,.98);display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:10px 12px;border-top:1px solid #eee7dc;border-bottom:1px solid var(--line)}
+nav button{border:0;border-radius:22px;padding:11px 8px;background:#fff;color:var(--ink);font-weight:750;font-size:15px;min-width:0}
 nav button.active{background:var(--sage);color:#fff}
 main{max-width:760px;margin:auto;padding:8px 14px 100px}
 .tab{display:none}.tab.active{display:block}
@@ -38,8 +38,20 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:9px 5px;b
 .totals{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.totalbox{background:var(--soft);border-radius:13px;padding:12px}.totalbox strong{font-size:24px;display:block}
 .meter{font-size:12px;color:var(--muted);margin-top:3px}.softTitle{font-size:21px;font-weight:820;margin-bottom:6px}
 .centerMessage{text-align:center;font-size:22px;font-weight:850;margin:14px 0 4px}
-@media(max-width:520px){.grid{grid-template-columns:1fr}.checks{grid-template-columns:1fr 1fr}.foodrow{grid-template-columns:1fr 1fr}.foodrow .foodname{grid-column:1/-1}.brand h1{font-size:34px}}
+.dashboard{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:12px 0}
+.dashbox{background:#fff;border-radius:16px;padding:13px;box-shadow:0 4px 16px #0000000c}
+.dashbox .big{font-size:25px;font-weight:850;display:block;margin-top:3px}
+.hardday{background:linear-gradient(135deg,#f6e8e2,#eef2e8);border:1px solid #eadbd3}
+.hard-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.hard-options label{display:flex;gap:8px;align-items:center;background:#fff;padding:11px;border-radius:11px;color:var(--ink);font-size:14px}
+.hard-options input{width:auto}
+.hidden{display:none!important}
+.winCard{background:linear-gradient(135deg,#edf3ea,#f8ebe5);border-radius:16px;padding:14px;margin-top:10px;line-height:1.45}
+.patternItem{background:#f7f4ee;border-radius:12px;padding:11px;margin:8px 0}
+.favoriteRow{display:grid;grid-template-columns:1.5fr .6fr .6fr auto;gap:6px;align-items:end;margin-top:9px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.checks{grid-template-columns:1fr 1fr}.foodrow,.favoriteRow{grid-template-columns:1fr 1fr}.foodrow .foodname,.favoriteRow .favname{grid-column:1/-1}.brand h1{font-size:34px}.dashboard{grid-template-columns:1fr 1fr}nav{grid-template-columns:repeat(3,1fr)}}
 </style>
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 </head>
 <body>
 
@@ -64,15 +76,53 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:9px 5px;b
 <main>
 <section id="today" class="tab active">
  <div class="encourage" id="encouragement">Small steps count. You only need the next helpful choice.</div>
+
+ <div class="dashboard" aria-label="Today's dashboard">
+   <div class="dashbox"><span class="small">Calories</span><span class="big" id="dashCalories">0</span></div>
+   <div class="dashbox"><span class="small">Protein</span><span class="big" id="dashProtein">0 g</span></div>
+   <div class="dashbox"><span class="small">Steps</span><span class="big" id="dashSteps">—</span></div>
+   <div class="dashbox"><span class="small">Movement</span><span class="big" id="dashMovement">—</span></div>
+ </div>
+
+ <div class="card hardday">
+   <div class="softTitle">Hard day?</div>
+   <p class="small">Tap this when today needs to be simpler. The goal is to stay connected to the plan — not do everything.</p>
+   <button class="btn secondary" id="hardDayBtn" type="button">Today is a hard day</button>
+   <div id="hardDayPanel" class="hidden">
+     <p><b>Pick any two. That is enough for today.</b></p>
+     <div class="hard-options">
+       <label><input id="hardWater" type="checkbox"> Drink water</label>
+       <label><input id="hardProtein" type="checkbox"> Eat some protein</label>
+       <label><input id="hardProduce" type="checkbox"> Fruit / vegetable</label>
+       <label><input id="hardWalk" type="checkbox"> 10-minute walk</label>
+       <label><input id="hardBed" type="checkbox"> Earlier bedtime</label>
+       <label><input id="hardKind" type="checkbox"> Be kind to myself</label>
+     </div>
+     <div id="hardDayMessage" class="winCard">Choose what feels doable.</div>
+   </div>
+ </div>
  <div class="card"><div class="softTitle">Today, gently</div><div class="grid">
   <div><label>Date</label><input id="dateField" type="date"></div><div><label>Weight (lb)</label><input id="weight" type="number" step=".1" placeholder="190.8"></div>
   <div><label>Water (cups)</label><input id="water" type="number" placeholder="8"></div><div><label>Puffiness / swelling</label><select id="puff"><option value="">Choose</option><option value="0">0 — none</option><option value="1">1 — mild</option><option value="2">2 — noticeable</option><option value="3">3 — significant</option></select></div>
   <div><label>Sleep last night (hours)</label><input id="sleep" type="number" step=".25" placeholder="7"></div><div><label>Stress today</label><select id="stress"><option value="">Choose</option><option value="1">1 — calm</option><option value="2">2 — manageable</option><option value="3">3 — moderate</option><option value="4">4 — high</option><option value="5">5 — very high</option></select></div>
+  <div><label>Steps — Apple Watch</label><input id="steps" type="number" inputmode="numeric" placeholder="e.g. 6500"></div><div><label>Exercise minutes — Apple Watch</label><input id="exercise" type="number" inputmode="numeric" placeholder="e.g. 25"></div>
   <div><label>Tai Chi walking (min)</label><input id="taichi" type="number" placeholder="30"></div><div><label>Target shift (hours)</label><input id="target" type="number" step=".25" placeholder="0"></div>
   <div class="full"><label>Notes — meals, sodium, sleep, swelling, how you felt</label><textarea id="notes"></textarea></div>
  </div></div>
 
  <div class="card"><div class="softTitle">Food log</div><p class="small">Tap a usual food or enter anything else. Restaurant meals, dessert and imperfect estimates all belong here.</p>
+
+  <div class="softTitle" style="font-size:17px;margin-top:8px">My usual meals</div>
+  <p class="small">Save something once, then log it with one tap next time.</p>
+  <div id="favoriteButtons"></div>
+  <div class="favoriteRow">
+    <div class="favname"><label>Save a usual meal</label><input id="favoriteName" placeholder="Coffee + eggs, chicken pasta…"></div>
+    <div><label>Calories</label><input id="favoriteCal" type="number" placeholder="optional"></div>
+    <div><label>Protein g</label><input id="favoritePro" type="number" placeholder="optional"></div>
+    <button type="button" id="saveFavoriteBtn">Save</button>
+  </div>
+
+  <hr style="border:0;border-top:1px solid var(--line);margin:17px 0">
   <label>Quick add</label><select id="quickFood">
    <option value="">Choose a usual food…</option>
    <optgroup label="Breakfast & eggs">
@@ -114,10 +164,13 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:9px 5px;b
 
 <section id="activity" class="tab">
  <div class="card"><div class="softTitle">Last 7 days</div><div id="activitySummary"></div></div>
+ <div class="card"><div class="softTitle">Your personal activity baseline</div><div id="stepBaseline" class="winCard">Log Apple Watch steps for a couple of weeks and this will learn the difference between your desk days and your busy Target days. No arbitrary 10,000-step rule.</div></div>
  <div class="card"><div class="softTitle">Your movement plan</div><p><b>Weeks 1–2:</b> Tai Chi 30 min × 3; strength 15 min × 2.</p><p><b>Weeks 3–4:</b> Tai Chi 35–40 min × 3; strength × 2.</p><p><b>Weeks 5–8:</b> Tai Chi 40–45 min × 3–4 as Target allows; strength × 2.</p><p><b>Weeks 9–12:</b> Keep the routine sustainable. A busy Target fulfillment shift counts as meaningful activity.</p><div class="notice">On a long Target day, recovery can be the healthy choice. You do not need to “earn” rest with another workout.</div></div>
 </section>
 
 <section id="weekly" class="tab">
+ <div class="card"><div class="softTitle">This week's wins</div><div id="weeklyWins" class="winCard">Your wins will appear as you log your week.</div></div>
+ <div class="card"><div class="softTitle">Pattern finder</div><p class="small">These are simple observations from what you log — not medical conclusions.</p><div id="patterns"></div></div>
  <div class="card"><div class="softTitle">Weekly check-in</div><p class="small">No grades. Just notice what helped and what made the week harder.</p><div class="grid">
   <div><label>Week ending</label><input id="weekDate" type="date"></div><div><label>How clothes feel</label><input id="weekFit" placeholder="Optional"></div>
   <div class="full"><label>What worked?</label><textarea id="worked"></textarea></div><div class="full"><label>What was hard?</label><textarea id="hard"></textarea></div>
@@ -128,6 +181,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:9px 5px;b
 <section id="plan" class="tab">
  <div class="centerMessage">You’ve Got This. ♥</div>
  <div class="encourage">The plan bends. You don't quit.</div>
+ <div class="card"><div class="softTitle">How Road to 180 works</div><p>This app rewards <b>showing up</b>, not perfection. No streak resets. No red failure screens. No earning food with exercise.</p><p class="small">Apple Watch steps and exercise minutes are context. Your personal trend matters more than an arbitrary daily step number.</p></div>
  <div class="card"><div class="softTitle">Starting targets</div><p><span class="pill">1,600–1,700 calories</span><span class="pill">90–110 g protein</span><span class="pill">Water throughout the day</span></p><p class="small">These are guideposts, not pass/fail numbers. We adjust based on your trend, hunger, energy and how you feel.</p></div>
  <div class="card"><div class="softTitle">Budget-friendly rhythm</div><p><b>Breakfast:</b> eggs most days; bagel days can stay.</p><p><b>Lunch/dinner:</b> chicken pasta stretched with vegetables, eggs, tuna, potatoes, beans or leftovers.</p><p><b>Snacks:</b> boiled eggs, carrots, yogurt, or 1–2 small Kodiak protein balls.</p></div>
  <div class="card"><div class="softTitle">Puffiness notes</div><p>Use the 0–3 score and notes to look for patterns with sodium-heavy meals, sleep, stress and activity.</p><div class="notice">This tracker can't diagnose swelling. Seek medical advice for new or worsening generalized swelling, rapid weight gain over a few days, shortness of breath, reduced urination, or significant leg swelling. Lip, tongue or throat swelling or trouble breathing is an emergency.</div></div>
@@ -140,9 +194,10 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:9px 5px;b
 "use strict";
 const STORAGE_KEY="road180_v1";
 const $=id=>document.getElementById(id);
-const state=()=>({days:{},measurements:[],weeks:[]});
+const state=()=>({days:{},measurements:[],weeks:[],favorites:[]});
 let data;
 try{data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null")||state()}catch(e){data=state()}
+if(!data.days)data.days={}; if(!data.measurements)data.measurements=[]; if(!data.weeks)data.weeks=[]; if(!data.favorites)data.favorites=[];
 
 function todayISO(){const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 $("dateField").value=todayISO(); $("mdate").value=todayISO(); $("weekDate").value=todayISO();
@@ -150,7 +205,7 @@ $("dateField").value=todayISO(); $("mdate").value=todayISO(); $("weekDate").valu
 function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data)); renderAll()}
 function currentDate(){return $("dateField").value}
 function currentDay(){const d=currentDate(); if(!data.days[d])data.days[d]={foods:[]}; if(!Array.isArray(data.days[d].foods))data.days[d].foods=[]; return data.days[d]}
-const dayFields=["weight","water","puff","sleep","stress","taichi","target","notes","strength","waterGoal","veg","kind"];
+const dayFields=["weight","water","puff","sleep","stress","steps","exercise","taichi","target","notes","strength","waterGoal","veg","kind","hardWater","hardProtein","hardProduce","hardWalk","hardBed","hardKind"];
 
 function switchTab(target){
  document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active",el.id===target));
@@ -166,12 +221,13 @@ document.querySelectorAll("#tabs button").forEach(btn=>{
 function loadDay(){
  const x=data.days[currentDate()]||{};
  dayFields.forEach(id=>{const e=$(id); if(e.type==="checkbox")e.checked=!!x[id]; else e.value=x[id]??""});
- renderFoods(); setEncouragement();
+ hardDayOpen=!!x.hardDay; $("hardDayPanel").classList.toggle("hidden",!hardDayOpen); $("hardDayBtn").textContent=hardDayOpen?"Return to regular day":"Today is a hard day"; updateHardDayMessage();
+ renderFoods(); setEncouragement(); renderFavorites();
 }
 $("dateField").addEventListener("change",loadDay);
 
 function saveDay(){
- const old=currentDay(), x={foods:old.foods||[]};
+ const old=currentDay(), x={foods:old.foods||[],hardDay:old.hardDay||false};
  dayFields.forEach(id=>{const e=$(id); x[id]=e.type==="checkbox"?e.checked:e.value});
  const sums=sumFoods(x.foods); x.calories=sums.cal; x.protein=sums.pro;
  data.days[currentDate()]=x; persist(); setEncouragement();
@@ -199,12 +255,65 @@ $("customAddBtn").addEventListener("click",addCustom);
 
 window.removeFood=function(i){currentDay().foods.splice(i,1); persist(); renderFoods(); setEncouragement()}
 
+
+function renderFavorites(){
+ const box=$("favoriteButtons");
+ if(!data.favorites.length){box.innerHTML="<p class='small'>No saved usual meals yet.</p>";return}
+ box.innerHTML=data.favorites.map((f,i)=>`<span class="pill" style="cursor:pointer" data-fav="${i}">＋ ${escapeHtml(f.name)}</span>`).join("")+
+   `<div class="small" style="margin-top:6px">Tap a meal to log it. <button type="button" id="manageFavs" style="border:0;background:none;text-decoration:underline;color:inherit">Manage</button></div>`;
+ box.querySelectorAll("[data-fav]").forEach(el=>el.addEventListener("click",()=>addFavorite(+el.dataset.fav)));
+ const manage=$("manageFavs"); if(manage)manage.addEventListener("click",()=>{
+   if(!data.favorites.length)return;
+   const names=data.favorites.map((f,i)=>`${i+1}. ${f.name}`).join("\n");
+   const which=prompt("Enter the number of a usual meal to remove:\n\n"+names);
+   const idx=+which-1; if(idx>=0&&idx<data.favorites.length){data.favorites.splice(idx,1);persist();renderFavorites()}
+ });
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function addFavorite(i){
+ const f=data.favorites[i]; if(!f)return;
+ currentDay().foods.push({name:f.name,cal:f.cal,pro:f.pro});
+ persist(); renderFoods(); setEncouragement();
+}
+$("saveFavoriteBtn").addEventListener("click",()=>{
+ const n=$("favoriteName").value.trim(); if(!n)return;
+ data.favorites.push({name:n,cal:$("favoriteCal").value?+$("favoriteCal").value:null,pro:$("favoritePro").value?+$("favoritePro").value:null});
+ $("favoriteName").value="";$("favoriteCal").value="";$("favoritePro").value="";
+ persist();renderFavorites();
+});
+
 function renderFoods(){
  const f=(data.days[currentDate()]||{}).foods||[];
  $("foodList").innerHTML=f.length?'<table><tr><th>Food</th><th>Cal</th><th>Protein</th><th></th></tr>'+f.map((x,i)=>`<tr><td>${x.name}</td><td>${x.cal??"—"}</td><td>${x.pro!=null?x.pro+" g":"—"}</td><td><button type="button" onclick="removeFood(${i})">×</button></td></tr>`).join("")+"</table>":"<p class='small'>Nothing logged yet.</p>";
  const s=sumFoods(f);
  $("calTotal").innerHTML=Math.round(s.cal)+(s.known<f.length?' <span class="small">+ unestimated</span>':'');
  $("proTotal").textContent=s.pro.toFixed(1)+" g";
+ $("dashCalories").textContent=Math.round(s.cal)+(s.known<f.length?"+":"");
+ $("dashProtein").textContent=s.pro.toFixed(0)+" g";
+ const d=data.days[currentDate()]||{};
+ $("dashSteps").textContent=d.steps?Number(d.steps).toLocaleString():"—";
+ const move=(+d.exercise||0)||(+d.taichi||0);
+ $("dashMovement").textContent=move?move+" min":(+d.target>=4?d.target+" h Target":"—");
+}
+
+
+let hardDayOpen=false;
+function setHardDay(open){
+ hardDayOpen=open;
+ currentDay().hardDay=open;
+ $("hardDayPanel").classList.toggle("hidden",!open);
+ $("hardDayBtn").textContent=open?"Return to regular day":"Today is a hard day";
+ updateHardDayMessage();
+ localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+}
+$("hardDayBtn").addEventListener("click",()=>setHardDay(!hardDayOpen));
+["hardWater","hardProtein","hardProduce","hardWalk","hardBed","hardKind"].forEach(id=>{
+ $(id).addEventListener("change",()=>{currentDay()[id]=$(id).checked;localStorage.setItem(STORAGE_KEY,JSON.stringify(data));updateHardDayMessage()});
+});
+function updateHardDayMessage(){
+ const ids=["hardWater","hardProtein","hardProduce","hardWalk","hardBed","hardKind"];
+ const n=ids.filter(id=>$(id).checked).length;
+ $("hardDayMessage").textContent=n>=2?"That is enough for today. You stayed connected to your plan. ♥":n===1?"One done. Pick one more if you can — then call it a win.":"Choose what feels doable.";
 }
 
 const baseEnc=[
@@ -217,7 +326,8 @@ const baseEnc=[
 ];
 function setEncouragement(){
  const x=data.days[currentDate()]||{}, f=x.foods||[], s=sumFoods(f); let msg="";
- if(+x.target>=4) msg="That Target shift was real movement. You do not owe anyone an extra workout tonight.";
+ if(x.hardDay) msg="A hard day does not need a perfect plan. Staying connected counts.";
+ else if(+x.target>=4) msg="That Target shift was real movement. You do not owe anyone an extra workout tonight.";
  else if(+x.stress>=4) msg="High-stress day: make the plan smaller, not harsher. One helpful choice is enough.";
  else if(s.pro>=90) msg="You hit your protein target — that's a strong little win.";
  else if(+x.water>=8) msg="Water goal reached. Quiet consistency counts.";
@@ -242,10 +352,72 @@ function renderAll(){
  const avg=weeklyAvg(rows); $("weeklyAverage").textContent=avg?`Your 7-day average is ${avg.toFixed(1)} lb. The trend matters more than one day's number.`:"Add weigh-ins during the week and your 7-day average will appear here.";
  $("measurements").innerHTML=data.measurements.length?'<table><tr><th>Date</th><th>Waist</th></tr>'+data.measurements.slice().reverse().map(x=>`<tr><td>${x.date}</td><td>${x.waist||"—"}</td></tr>`).join("")+"</table>":"";
  $("weeks").innerHTML=data.weeks.length?data.weeks.slice().reverse().map(x=>`<div style="margin-top:14px"><b>${x.date}</b><div class="small">Worked: ${x.worked||"—"}<br>Hard: ${x.hard||"—"}<br>Next small step: ${x.next||"—"}</div></div>`).join(""):"";
- const now=new Date(),start=new Date(now);start.setDate(now.getDate()-6);let t=0,tc=0,st=0;
- Object.entries(data.days).forEach(([d,x])=>{const q=new Date(d+"T12:00:00");if(q>=start&&q<=now){t+=+(x.target||0);tc+=+(x.taichi||0);st+=x.strength?1:0}});
- $("activitySummary").innerHTML=`<div class="grid"><div><span class="small">Target hours</span><div class="metric">${t}</div></div><div><span class="small">Tai Chi minutes</span><div class="metric">${tc}</div></div><div><span class="small">Strength sessions</span><div class="metric">${st}</div></div></div>`;
- renderFoods(); setEncouragement();
+ const now=new Date(),start=new Date(now);start.setDate(now.getDate()-6);let t=0,tc=0,st=0,steps=0,stepDays=0,ex=0;
+ Object.entries(data.days).forEach(([d,x])=>{const q=new Date(d+"T12:00:00");if(q>=start&&q<=now){t+=+(x.target||0);tc+=+(x.taichi||0);st+=x.strength?1:0;ex+=+(x.exercise||0);if(+x.steps>0){steps+=+x.steps;stepDays++}}});
+ $("activitySummary").innerHTML=`<div class="grid"><div><span class="small">Avg daily steps</span><div class="metric">${stepDays?Math.round(steps/stepDays).toLocaleString():"—"}</div></div><div><span class="small">Watch exercise min</span><div class="metric">${ex}</div></div><div><span class="small">Target hours</span><div class="metric">${t}</div></div><div><span class="small">Tai Chi minutes</span><div class="metric">${tc}</div></div><div><span class="small">Strength sessions</span><div class="metric">${st}</div></div></div>`;
+ renderStepBaseline();
+ renderWinsAndPatterns();
+ renderFoods(); renderFavorites(); setEncouragement();
+}
+
+
+function recentDays(n){
+ const end=new Date(), start=new Date(); start.setDate(end.getDate()-(n-1));
+ return Object.entries(data.days).filter(([d,x])=>{const q=new Date(d+"T12:00:00");return q>=start&&q<=end}).sort((a,b)=>a[0].localeCompare(b[0]));
+}
+function renderStepBaseline(){
+ const rows=Object.entries(data.days).filter(([d,x])=>+x.steps>0);
+ if(rows.length<5){$("stepBaseline").textContent=`You have ${rows.length} step day${rows.length===1?"":"s"} logged. After about 5–10 days, Road to 180 can start showing your personal baseline.`;return}
+ const desk=rows.filter(([d,x])=>+x.target<2).map(([d,x])=>+x.steps);
+ const target=rows.filter(([d,x])=>+x.target>=2).map(([d,x])=>+x.steps);
+ const avg=a=>a.length?Math.round(a.reduce((s,v)=>s+v,0)/a.length):null;
+ const all=avg(rows.map(([d,x])=>+x.steps));
+ let txt=`Your logged average is ${all.toLocaleString()} steps/day. `;
+ if(desk.length>=2)txt+=`Desk/lower-Target days average ${avg(desk).toLocaleString()}. `;
+ if(target.length>=2)txt+=`Target days average ${avg(target).toLocaleString()}. `;
+ txt+="We'll use your own normal instead of judging you against 10,000.";
+ $("stepBaseline").textContent=txt;
+}
+function renderWinsAndPatterns(){
+ const r7=recentDays(7), r14=recentDays(14), prev=r14.slice(0,Math.max(0,r14.length-r7.length));
+ let wins=[];
+ const logged=r7.filter(([d,x])=>Object.keys(x).length>1).length;
+ if(logged)wins.push(`You checked in ${logged} day${logged===1?"":"s"} this week.`);
+ const proteinDays=r7.filter(([d,x])=>sumFoods(x.foods||[]).pro>=90).length;
+ if(proteinDays)wins.push(`You reached 90 g protein on ${proteinDays} day${proteinDays===1?"":"s"}.`);
+ const strength=r7.filter(([d,x])=>x.strength).length;
+ if(strength)wins.push(`You logged ${strength} strength session${strength===1?"":"s"}.`);
+ const water=r7.filter(([d,x])=>+x.water>=8||x.waterGoal).length;
+ if(water)wins.push(`You hit your water goal on ${water} day${water===1?"":"s"}.`);
+ const steps7=r7.filter(([d,x])=>+x.steps>0).map(([d,x])=>+x.steps);
+ const stepsPrev=prev.filter(([d,x])=>+x.steps>0).map(([d,x])=>+x.steps);
+ const avg=a=>a.length?a.reduce((s,v)=>s+v,0)/a.length:null;
+ if(steps7.length>=3&&stepsPrev.length>=3&&avg(steps7)>avg(stepsPrev)+500)wins.push(`Your average steps are up about ${Math.round(avg(steps7)-avg(stepsPrev)).toLocaleString()} per day from the prior week.`);
+ $("weeklyWins").innerHTML=wins.length?wins.map(w=>`<div>♥ ${escapeHtml(w)}</div>`).join(""):"Your wins will appear as you log your week. Showing up counts.";
+
+ let pats=[];
+ const puffRows=Object.entries(data.days).filter(([d,x])=>x.puff!==""&&x.puff!=null);
+ if(puffRows.length>=5){
+   const hi=puffRows.filter(([d,x])=>+x.stress>=4);
+   const lo=puffRows.filter(([d,x])=>+x.stress>0&&+x.stress<=2);
+   if(hi.length>=2&&lo.length>=2){
+     const ph=avg(hi.map(([d,x])=>+x.puff)), pl=avg(lo.map(([d,x])=>+x.puff));
+     if(ph>pl+.4)pats.push("Your puffiness scores have tended to be higher on high-stress days.");
+   }
+   const short=puffRows.filter(([d,x])=>+x.sleep>0&&+x.sleep<6.5);
+   const rested=puffRows.filter(([d,x])=>+x.sleep>=7);
+   if(short.length>=2&&rested.length>=2){
+     const ps=avg(short.map(([d,x])=>+x.puff)), pr=avg(rested.map(([d,x])=>+x.puff));
+     if(ps>pr+.4)pats.push("Your puffiness scores have tended to be higher after shorter sleep.");
+   }
+ }
+ const targetFood=Object.entries(data.days).filter(([d,x])=>+x.target>=4&&Array.isArray(x.foods)&&x.foods.length);
+ const nonTargetFood=Object.entries(data.days).filter(([d,x])=>+x.target<2&&Array.isArray(x.foods)&&x.foods.length);
+ if(targetFood.length>=3&&nonTargetFood.length>=3){
+   const tp=avg(targetFood.map(([d,x])=>sumFoods(x.foods||[]).pro)), np=avg(nonTargetFood.map(([d,x])=>sumFoods(x.foods||[]).pro));
+   if(tp+10<np)pats.push("Protein has tended to run lower on longer Target-shift days. A planned grab-and-go protein could make those days easier.");
+ }
+ $("patterns").innerHTML=pats.length?pats.map(p=>`<div class="patternItem">${escapeHtml(p)}</div>`).join(""):"Keep logging sleep, stress, puffiness, steps and food. Once there is enough information, gentle patterns will appear here.";
 }
 
 $("exportBtn").addEventListener("click",()=>{const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="road-to-180-backup.json";a.click()});
