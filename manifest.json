@@ -2,8 +2,9 @@
   "name": "Road to 180",
   "short_name": "Road180",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#f7f3ed",
-  "theme_color": "#f5efe6",
+  "background_color": "#f7f1e8",
+  "theme_color": "#788f78",
   "icons": []
 }

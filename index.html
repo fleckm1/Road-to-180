@@ -3,177 +3,257 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f5efe6">
+<meta name="theme-color" content="#788f78">
 <title>Road to 180</title>
 <link rel="manifest" href="manifest.json">
 <style>
-:root{--bg:#f7f3ed;--card:#fff;--ink:#28312d;--muted:#6d746f;--accent:#6c826d;--soft:#e8eee6;--line:#ddd8cf}
-*{box-sizing:border-box} body{margin:0;background:linear-gradient(rgba(247,243,237,.90),rgba(247,243,237,.96)),url("road180-background.png") center top/cover fixed;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
-header{padding:22px 18px 12px;max-width:760px;margin:auto} h1{margin:0;font-size:28px} header p{margin:5px 0;color:var(--muted)}
-nav{position:sticky;top:0;z-index:2;background:rgba(247,243,237,.96);display:flex;gap:7px;padding:8px 12px;overflow:auto;border-bottom:1px solid var(--line)}
-nav button{white-space:nowrap;border:0;border-radius:18px;padding:9px 13px;background:#fff;color:var(--ink);font-weight:600} nav button.active{background:var(--accent);color:white}
-main{max-width:760px;margin:auto;padding:12px 14px 90px}.tab{display:none}.tab.active{display:block}
-.card{background:rgba(255,255,255,.94);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000a}
+:root{--bg:#f7f1e8;--card:#fffdf9;--ink:#2c352f;--muted:#6f766f;--sage:#788f78;--soft:#e7eee4;--blush:#f1ddd5;--line:#ded8cf}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+.inspiration{max-width:760px;margin:0 auto;padding:14px 14px 4px}
+.inspiration img{display:block;width:100%;height:auto;border-radius:24px;box-shadow:0 8px 26px #00000018}
+.brand{max-width:760px;margin:auto;padding:18px 20px 13px}
+h1{font-size:36px;margin:0 0 4px}.tagline{font-size:19px;font-weight:800;margin:0}.sub{color:#5d675f;margin:5px 0 0;font-weight:650}
+nav{position:sticky;top:0;z-index:20;background:rgba(247,241,232,.98);display:flex;gap:7px;padding:10px 12px;overflow-x:auto;border-top:1px solid #eee7dc;border-bottom:1px solid var(--line);-webkit-overflow-scrolling:touch}
+nav button{white-space:nowrap;border:0;border-radius:22px;padding:11px 15px;background:#fff;color:var(--ink);font-weight:750;font-size:15px}
+nav button.active{background:var(--sage);color:#fff}
+main{max-width:760px;margin:auto;padding:8px 14px 100px}
+.tab{display:none}.tab.active{display:block}
+.card{background:rgba(255,255,255,.96);border-radius:20px;padding:17px;margin:12px 0;box-shadow:0 4px 16px #0000000c}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}
-label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px} input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font-size:16px;background:#fff}
-textarea{min-height:70px}.btn{border:0;border-radius:11px;background:var(--accent);color:#fff;padding:11px 15px;font-weight:700;font-size:15px}.btn.secondary{background:var(--soft);color:var(--ink)}
-.metric{font-size:28px;font-weight:800}.small{font-size:13px;color:var(--muted)} .progress{height:12px;background:#ece8e1;border-radius:9px;overflow:hidden}.progress i{display:block;height:100%;background:var(--accent);width:0}
-.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{display:flex;gap:8px;align-items:center;background:var(--soft);padding:10px;border-radius:10px}.check input{width:auto}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fff}
+textarea{min-height:74px}
+.btn{border:0;border-radius:12px;background:var(--sage);color:#fff;padding:12px 16px;font-weight:800;font-size:15px}
+.btn.secondary{background:var(--soft);color:var(--ink)}
+.metric{font-size:29px;font-weight:850}.small{font-size:13px;color:var(--muted);line-height:1.45}
+.progress{height:12px;background:#ece8e1;border-radius:9px;overflow:hidden}.progress i{display:block;height:100%;background:var(--sage);width:0}
+.encourage{background:linear-gradient(135deg,var(--soft),var(--blush));border-radius:18px;padding:17px;margin:12px 0;font-size:18px;font-weight:780;line-height:1.4}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{display:flex;gap:8px;align-items:center;background:var(--soft);padding:11px;border-radius:11px}.check input{width:auto}
+.foodrow{display:grid;grid-template-columns:1.5fr .65fr .65fr auto;gap:6px;align-items:end;margin-top:9px}.foodrow button{padding:11px;border:0;border-radius:9px;background:#eee}
 table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:9px 5px;border-bottom:1px solid var(--line);text-align:left}
-.pill{display:inline-block;background:var(--soft);padding:5px 9px;border-radius:12px;margin:3px;font-size:13px}
-.notice{background:#fff8df;border-radius:12px;padding:11px;font-size:13px}
-@media(max-width:480px){.grid{grid-template-columns:1fr}.checks{grid-template-columns:1fr 1fr}}
-
-.encourage{background:linear-gradient(135deg,var(--soft),#f3ded6);border-radius:16px;padding:15px;margin:10px 0;font-weight:650;line-height:1.4}
-.foodrow{display:grid;grid-template-columns:1.5fr .7fr .7fr auto;gap:6px;align-items:end;margin-top:8px}
-.foodrow button{padding:10px;border:0;border-radius:9px;background:#eee}
-@media(max-width:520px){.foodrow{grid-template-columns:1fr 1fr}.foodrow .foodname{grid-column:1/-1}}
+.pill{display:inline-block;background:var(--soft);padding:6px 10px;border-radius:13px;margin:3px;font-size:13px}
+.notice{background:#fff7df;border-radius:12px;padding:11px;font-size:13px;line-height:1.45}
+.totals{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.totalbox{background:var(--soft);border-radius:13px;padding:12px}.totalbox strong{font-size:24px;display:block}
+.meter{font-size:12px;color:var(--muted);margin-top:3px}.softTitle{font-size:21px;font-weight:820;margin-bottom:6px}
+.centerMessage{text-align:center;font-size:22px;font-weight:850;margin:14px 0 4px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.checks{grid-template-columns:1fr 1fr}.foodrow{grid-template-columns:1fr 1fr}.foodrow .foodname{grid-column:1/-1}.brand h1{font-size:34px}}
 </style>
 </head>
 <body>
-<header style="min-height:210px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(to bottom,rgba(255,255,255,.05),rgba(247,243,237,.88));border-radius:0 0 24px 24px"><h1>Road to 180</h1><p><b>Small steps. Big changes.</b><br>The plan bends. You don't quit. ♥</p></header>
-<nav>
-<button class="active" data-tab="today">Today</button><button data-tab="progress">Progress</button><button data-tab="activity">Activity</button><button data-tab="weekly">Weekly</button><button data-tab="plan">My Plan</button>
+
+<section class="inspiration" aria-label="Road to 180 encouragement">
+  <img src="road180-background.png" alt="You’ve Got This motivational Road to 180 inspiration">
+</section>
+
+<header class="brand">
+  <h1>Road to 180</h1>
+  <p class="tagline">Small steps. Big changes.</p>
+  <p class="sub">The plan bends. You don't quit. ♥</p>
+</header>
+
+<nav id="tabs" aria-label="Road to 180 sections">
+  <button type="button" class="active" data-target="today">Today</button>
+  <button type="button" data-target="progress">Progress</button>
+  <button type="button" data-target="activity">Activity</button>
+  <button type="button" data-target="weekly">Weekly</button>
+  <button type="button" data-target="plan">My Plan</button>
 </nav>
+
 <main>
 <section id="today" class="tab active">
- <div class="card"><div class="grid">
-  <div><label>Date</label><input id="date" type="date"></div>
-  <div><label>Weight (lb)</label><input id="weight" type="number" step=".1" placeholder="190.8"></div>
-  <div><label>Water (cups)</label><input id="water" type="number" placeholder="8"></div>
-  <div><label>Sleep last night (hours)</label><input id="sleep" type="number" step=".25" placeholder="7"></div>
-  <div><label>Stress today</label><select id="stress"><option value="">Choose</option><option value="1">1 — calm</option><option value="2">2 — manageable</option><option value="3">3 — moderate</option><option value="4">4 — high</option><option value="5">5 — very high</option></select></div>
-  <div><label>Puffiness / swelling</label><select id="puff"><option value="">Choose</option><option value="0">0 — none</option><option value="1">1 — mild</option><option value="2">2 — noticeable</option><option value="3">3 — significant</option></select></div>
-  <div><label>Tai Chi walking (min)</label><input id="taichi" type="number" placeholder="30"></div>
-  <div><label>Target shift (hours)</label><input id="target" type="number" step=".25" placeholder="0"></div>
-  <div class="full"><label>Notes — meals, sodium-heavy foods, sleep, swelling, etc.</label><textarea id="notes"></textarea></div>
+ <div class="encourage" id="encouragement">Small steps count. You only need the next helpful choice.</div>
+ <div class="card"><div class="softTitle">Today, gently</div><div class="grid">
+  <div><label>Date</label><input id="dateField" type="date"></div><div><label>Weight (lb)</label><input id="weight" type="number" step=".1" placeholder="190.8"></div>
+  <div><label>Water (cups)</label><input id="water" type="number" placeholder="8"></div><div><label>Puffiness / swelling</label><select id="puff"><option value="">Choose</option><option value="0">0 — none</option><option value="1">1 — mild</option><option value="2">2 — noticeable</option><option value="3">3 — significant</option></select></div>
+  <div><label>Sleep last night (hours)</label><input id="sleep" type="number" step=".25" placeholder="7"></div><div><label>Stress today</label><select id="stress"><option value="">Choose</option><option value="1">1 — calm</option><option value="2">2 — manageable</option><option value="3">3 — moderate</option><option value="4">4 — high</option><option value="5">5 — very high</option></select></div>
+  <div><label>Tai Chi walking (min)</label><input id="taichi" type="number" placeholder="30"></div><div><label>Target shift (hours)</label><input id="target" type="number" step=".25" placeholder="0"></div>
+  <div class="full"><label>Notes — meals, sodium, sleep, swelling, how you felt</label><textarea id="notes"></textarea></div>
  </div></div>
- 
-<div class="encourage" id="encouragement">Small steps count.</div>
-<div class="card">
-<b>Food log</b>
-<p class="small">Use a quick-add food or enter anything else you eat. Restaurant meals, dinner at someone else's house, dessert — it all belongs here without judgment.</p>
-<label>Quick add</label>
-<select id="quickFood">
-<option value="">Choose a usual food…</option>
-<option data-cal="72" data-pro="6.3">1 egg</option>
-<option data-cal="144" data-pro="12.6">2 eggs</option>
-<option data-cal="81" data-pro="3.6">Kodiak protein ball — 1 small</option>
-<option data-cal="161" data-pro="7.2">Kodiak protein balls — 2 small</option>
-<option data-cal="80" data-pro="16">Tuna Creations — Lemon Pepper</option>
-<option data-cal="70" data-pro="15">Tuna Creations — Ranch</option>
-<option data-cal="70" data-pro="15">Tuna Creations — Hot Buffalo</option>
-<option data-cal="110" data-pro="16">Tuna Creations — Herb & Garlic</option>
-<option data-cal="300" data-pro="18">Egg breakfast burrito — estimate</option>
-<option data-cal="320" data-pro="20">Egg sandwich — estimate</option>
-<option data-cal="390" data-pro="14">Bagel + cream cheese + egg — estimate</option>
-<option data-cal="35" data-pro="1">Carrots — 1 cup estimate</option>
-<option data-cal="100" data-pro="10">Yogurt — typical serving estimate</option>
-<option data-cal="233" data-pro="13.5">Target-shift snack — 2 protein balls + egg</option>
-<option data-cal="280" data-pro="25">Tuna + egg wrap — estimate</option>
-<option data-cal="500" data-pro="30">Chicken pasta — typical bowl estimate</option>
-</select>
-<button class="btn secondary" style="margin-top:7px" onclick="quickAdd()">Add food</button>
-<div class="foodrow">
-<div class="foodname"><label>Anything else</label><input id="customFood" placeholder="Restaurant meal, pizza, casserole…"></div>
-<div><label>Calories</label><input id="customCal" type="number" placeholder="optional"></div>
-<div><label>Protein g</label><input id="customPro" type="number" placeholder="optional"></div>
-<button onclick="addCustomFood()">Add</button>
-</div>
-<p class="small">Don't know the calories? Leave them blank. Logging the meal is enough.</p>
-<div id="foodList"></div><div id="foodTotals" class="small" style="margin-top:10px"></div>
-</div>
-<div class="card"><b>Today's little wins</b><div class="checks" style="margin-top:10px">
-  <label class="check"><input id="strength" type="checkbox"> Strength</label>
-  <label class="check"><input id="kind" type="checkbox"> Kind to myself</label>
-  <label class="check"><input id="waterGoal" type="checkbox"> Water goal</label>
-  <label class="check"><input id="veg" type="checkbox"> Veggies / fruit</label>
- </div><button class="btn" style="margin-top:12px" onclick="saveDay()">Save Today</button></div>
- <div class="notice">Your entries stay in this browser on this device. App updates won't intentionally erase them. Use Export Backup periodically for extra protection.</div>
+
+ <div class="card"><div class="softTitle">Food log</div><p class="small">Tap a usual food or enter anything else. Restaurant meals, dessert and imperfect estimates all belong here.</p>
+  <label>Quick add</label><select id="quickFood">
+   <option value="">Choose a usual food…</option>
+   <optgroup label="Breakfast & eggs">
+    <option data-cal="72" data-pro="6.3">1 egg</option><option data-cal="144" data-pro="12.6">2 eggs</option>
+    <option data-cal="300" data-pro="18">Egg breakfast burrito — estimate</option><option data-cal="320" data-pro="20">Egg sandwich — estimate</option>
+    <option data-cal="390" data-pro="14">Bagel + cream cheese + egg — estimate</option>
+   </optgroup>
+   <optgroup label="Snacks">
+    <option data-cal="81" data-pro="3.6">Kodiak protein ball — 1 small</option><option data-cal="161" data-pro="7.2">Kodiak protein balls — 2 small</option>
+    <option data-cal="72" data-pro="6.3">Hard-boiled egg</option><option data-cal="35" data-pro="1">Carrots — 1 cup estimate</option>
+    <option data-cal="100" data-pro="10">Yogurt — typical serving estimate</option>
+    <option data-cal="233" data-pro="13.5">Target-shift snack — 2 protein balls + 1 egg</option>
+   </optgroup>
+   <optgroup label="Tuna Creations">
+    <option data-cal="80" data-pro="16">Tuna Creations — Lemon Pepper</option><option data-cal="70" data-pro="15">Tuna Creations — Ranch</option>
+    <option data-cal="70" data-pro="15">Tuna Creations — Hot Buffalo</option><option data-cal="110" data-pro="16">Tuna Creations — Herb & Garlic</option>
+    <option data-cal="280" data-pro="25">Tuna + egg wrap — estimate</option>
+   </optgroup>
+   <optgroup label="Meals"><option data-cal="500" data-pro="30">Chicken pasta — typical bowl estimate</option><option data-cal="400" data-pro="27">Loaded tuna baked potato — estimate</option></optgroup>
+  </select>
+  <button class="btn secondary" style="margin-top:8px" id="quickAddBtn">Add food</button>
+  <div class="foodrow"><div class="foodname"><label>Anything else</label><input id="customFood" placeholder="Restaurant meal, pizza, casserole…"></div><div><label>Calories</label><input id="customCal" type="number" placeholder="optional"></div><div><label>Protein g</label><input id="customPro" type="number" placeholder="optional"></div><button type="button" id="customAddBtn">Add</button></div>
+  <p class="small">Don't know the nutrition? Leave it blank. Logging the meal is enough.</p>
+  <div id="foodList"></div>
+  <div class="totals"><div class="totalbox"><span class="small">Food calories</span><strong id="calTotal">0</strong><div class="meter">Starting target: 1,600–1,700</div></div><div class="totalbox"><span class="small">Protein</span><strong id="proTotal">0 g</strong><div class="meter">Target: 90–110 g</div></div></div>
+ </div>
+
+ <div class="card"><div class="softTitle">Today's little wins</div><div class="checks">
+  <label class="check"><input id="strength" type="checkbox"> Strength</label><label class="check"><input id="waterGoal" type="checkbox"> Water goal</label>
+  <label class="check"><input id="veg" type="checkbox"> Veggies / fruit</label><label class="check"><input id="kind" type="checkbox"> Kind to myself</label>
+ </div><button class="btn" style="margin-top:13px" id="saveDayBtn">Save Today</button></div>
 </section>
 
 <section id="progress" class="tab">
- <div class="card"><div class="grid">
-  <div><span class="small">Starting</span><div class="metric">190.8</div></div>
-  <div><span class="small">Goal #1</span><div class="metric">180</div></div>
-  <div class="full"><div class="progress"><i id="bar"></i></div><div id="progressText" class="small" style="margin-top:7px"></div></div>
- </div></div>
- <div class="card"><b>Weight trend</b><div id="weeklyAverage" class="encourage" style="font-size:15px"></div><div id="history" style="margin-top:8px"></div></div>
- <div class="card"><b>Measurements</b><div class="grid" style="margin-top:10px">
-  <div><label>Date</label><input id="mdate" type="date"></div><div><label>Waist (in)</label><input id="waist" type="number" step=".1"></div>
-  <div><label>Hips (optional)</label><input id="hips" type="number" step=".1"></div><div><label>Chest (optional)</label><input id="chest" type="number" step=".1"></div>
- </div><button class="btn" style="margin-top:10px" onclick="saveMeasurement()">Save measurement</button><div id="measurements"></div></div>
+ <div class="card"><div class="grid"><div><span class="small">Starting</span><div class="metric">190.8</div></div><div><span class="small">Goal #1</span><div class="metric">180</div></div><div class="full"><div class="progress"><i id="bar"></i></div><div id="progressText" class="small" style="margin-top:7px"></div></div></div></div>
+ <div class="card"><div class="softTitle">Weight trend</div><div id="weeklyAverage" class="encourage" style="font-size:16px"></div><div id="history"></div></div>
+ <div class="card"><div class="softTitle">Measurements</div><div class="grid"><div><label>Date</label><input id="mdate" type="date"></div><div><label>Waist (in)</label><input id="waist" type="number" step=".1"></div><div><label>Hips (optional)</label><input id="hips" type="number" step=".1"></div><div><label>Chest (optional)</label><input id="chest" type="number" step=".1"></div></div><button class="btn" style="margin-top:10px" id="saveMeasurementBtn">Save measurement</button><div id="measurements"></div></div>
 </section>
 
 <section id="activity" class="tab">
- <div class="card"><b>This week's movement</b><div id="activitySummary" style="margin-top:10px"></div></div>
- <div class="card"><b>12-week progression</b>
- <p><b>Weeks 1–2:</b> Tai Chi 30 min × 3; strength 15 min × 2.</p>
- <p><b>Weeks 3–4:</b> Tai Chi 35–40 min × 3; strength × 2.</p>
- <p><b>Weeks 5–8:</b> Tai Chi 40–45 min × 3–4 as Target schedule allows; strength × 2.</p>
- <p><b>Weeks 9–12:</b> Maintain the routine that feels sustainable. Target fulfillment counts as meaningful activity.</p></div>
+ <div class="card"><div class="softTitle">Last 7 days</div><div id="activitySummary"></div></div>
+ <div class="card"><div class="softTitle">Your movement plan</div><p><b>Weeks 1–2:</b> Tai Chi 30 min × 3; strength 15 min × 2.</p><p><b>Weeks 3–4:</b> Tai Chi 35–40 min × 3; strength × 2.</p><p><b>Weeks 5–8:</b> Tai Chi 40–45 min × 3–4 as Target allows; strength × 2.</p><p><b>Weeks 9–12:</b> Keep the routine sustainable. A busy Target fulfillment shift counts as meaningful activity.</p><div class="notice">On a long Target day, recovery can be the healthy choice. You do not need to “earn” rest with another workout.</div></div>
 </section>
 
 <section id="weekly" class="tab">
- <div class="card"><b>Weekly check-in</b><div class="grid" style="margin-top:10px">
-  <div><label>Week ending</label><input id="weekDate" type="date"></div>
-  <div><label>Waist / clothes feel</label><input id="weekFit" placeholder="Optional"></div>
-  <div class="full"><label>What worked?</label><textarea id="worked"></textarea></div>
-  <div class="full"><label>What was hard?</label><textarea id="hard"></textarea></div><div class="full"><label>One small thing to make next week easier</label><textarea id="nextSmall"></textarea></div>
- </div><button class="btn" onclick="saveWeek()">Save check-in</button><div id="weeks"></div></div>
+ <div class="card"><div class="softTitle">Weekly check-in</div><p class="small">No grades. Just notice what helped and what made the week harder.</p><div class="grid">
+  <div><label>Week ending</label><input id="weekDate" type="date"></div><div><label>How clothes feel</label><input id="weekFit" placeholder="Optional"></div>
+  <div class="full"><label>What worked?</label><textarea id="worked"></textarea></div><div class="full"><label>What was hard?</label><textarea id="hard"></textarea></div>
+  <div class="full"><label>One small thing to make next week easier</label><textarea id="nextSmall"></textarea></div>
+ </div><button class="btn" id="saveWeekBtn">Save check-in</button><div id="weeks"></div></div>
 </section>
 
 <section id="plan" class="tab">
- <div class="card"><b>Daily targets</b><p><span class="pill">1,600–1,700 calories</span><span class="pill">90–110 g protein</span><span class="pill">Water throughout day</span></p>
- <p class="small">These are starting targets, not pass/fail numbers. Adjust based on your actual trend and how you feel.</p></div>
- <div class="card"><b>Budget-friendly meal rhythm</b>
- <p><b>Breakfast:</b> 2-egg burrito or egg sandwich; bagel + eggs 1–2 days/week.</p>
- <p><b>Lunch/dinner:</b> chicken pasta with red sauce + some Alfredo; add frozen vegetables and keep chicken generous.</p>
- <p><b>Snacks:</b> boiled eggs, carrots, yogurt, or one Kodiak protein ball.</p>
- <p><b>Drinks:</b> coffee with measured creamer, water, Spark, sugar-free flavor packets.</p></div>
- <div class="card"><b>Puffiness experiment</b><p>Track puffiness 0–3 and note especially salty/packaged meals. Don't use this tracker to diagnose swelling.</p>
- <div class="notice">Seek medical care promptly for new/worsening generalized swelling, rapid weight gain over a few days, shortness of breath, reduced urination, or significant leg swelling. Lip/tongue/throat swelling or trouble breathing is an emergency.</div></div>
- <div class="card"><b>Your data</b><p class="small">Back up your entries before major phone/browser changes.</p>
- <button class="btn secondary" onclick="exportData()">Export Backup</button>
- <label class="btn secondary" style="display:inline-block;margin-left:6px">Import Backup<input type="file" accept=".json" onchange="importData(event)" style="display:none"></label></div>
+ <div class="centerMessage">You’ve Got This. ♥</div>
+ <div class="encourage">The plan bends. You don't quit.</div>
+ <div class="card"><div class="softTitle">Starting targets</div><p><span class="pill">1,600–1,700 calories</span><span class="pill">90–110 g protein</span><span class="pill">Water throughout the day</span></p><p class="small">These are guideposts, not pass/fail numbers. We adjust based on your trend, hunger, energy and how you feel.</p></div>
+ <div class="card"><div class="softTitle">Budget-friendly rhythm</div><p><b>Breakfast:</b> eggs most days; bagel days can stay.</p><p><b>Lunch/dinner:</b> chicken pasta stretched with vegetables, eggs, tuna, potatoes, beans or leftovers.</p><p><b>Snacks:</b> boiled eggs, carrots, yogurt, or 1–2 small Kodiak protein balls.</p></div>
+ <div class="card"><div class="softTitle">Puffiness notes</div><p>Use the 0–3 score and notes to look for patterns with sodium-heavy meals, sleep, stress and activity.</p><div class="notice">This tracker can't diagnose swelling. Seek medical advice for new or worsening generalized swelling, rapid weight gain over a few days, shortness of breath, reduced urination, or significant leg swelling. Lip, tongue or throat swelling or trouble breathing is an emergency.</div></div>
+ <div class="card"><div class="softTitle">Your data</div><p class="small">Your entries stay in this browser on this device. Export a backup occasionally, especially before browser or phone changes.</p><button class="btn secondary" id="exportBtn">Export Backup</button><label class="btn secondary" style="display:inline-block;margin-left:5px">Import Backup<input id="importFile" type="file" accept=".json" style="display:none"></label></div>
 </section>
 </main>
+
 <script>
-const KEY="road180_v1";
-const empty=()=>({days:{},measurements:[],weeks:[]});
-let data=JSON.parse(localStorage.getItem(KEY)||"null")||empty();
-const ids=["weight","water","puff","sleep","stress","taichi","target","notes","strength","kind","waterGoal","veg"];
-function isoToday(){let d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-date.value=isoToday(); mdate.value=isoToday(); weekDate.value=isoToday();
-function persist(){localStorage.setItem(KEY,JSON.stringify(data)); render()}
-function loadDay(){let x=data.days[date.value]||{};ids.forEach(id=>{let e=document.getElementById(id); if(e.type==="checkbox")e.checked=!!x[id];else e.value=x[id]??""});renderFoods();setEncouragement()}
-date.onchange=loadDay; loadDay();
-function saveDay(){let old=data.days[date.value]||{};let x={foods:old.foods||[]};ids.forEach(id=>{let e=document.getElementById(id);x[id]=e.type==="checkbox"?e.checked:e.value});let s=sumFoods(x.foods);x.calories=s.cal;x.protein=s.pro;data.days[date.value]=x;persist();setEncouragement();alert("Saved ✓  Small steps count.")}
+(function(){
+"use strict";
+const STORAGE_KEY="road180_v1";
+const $=id=>document.getElementById(id);
+const state=()=>({days:{},measurements:[],weeks:[]});
+let data;
+try{data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null")||state()}catch(e){data=state()}
 
-const encouragements=["Small steps count. You only need the next helpful choice.","Progress, not perfection. Ordinary days are where this gets built.","Stressful weeks need simpler plans, not stricter ones.","A meal out does not undo your progress. Enjoy it, log it, keep going.","Missing yesterday doesn't matter. You're here today.","You are doing hard things. Give yourself credit for showing up."];
-function sumFoods(f){return {cal:f.filter(x=>x.cal!=null).reduce((a,x)=>a+(+x.cal||0),0),pro:f.filter(x=>x.pro!=null).reduce((a,x)=>a+(+x.pro||0),0)}}
-function setEncouragement(){let x=data.days[date.value]||{},s=sumFoods(x.foods||[]),msg;if(+x.target>=4)msg="That Target shift was real movement. You do not owe anyone an extra workout tonight.";else if(+x.stress>=4)msg="High-stress day: make the plan smaller, not harsher. One helpful choice is enough.";else if(s.pro>=90)msg="You hit your protein target — that's a strong little win.";else if(+x.water>=8)msg="Water goal reached. Quiet consistency counts.";else{let seed=[...date.value].reduce((a,c)=>a+c.charCodeAt(0),0);msg=encouragements[seed%encouragements.length]}encouragement.textContent=msg}
-function dayObj(){if(!data.days[date.value])data.days[date.value]={foods:[]};if(!data.days[date.value].foods)data.days[date.value].foods=[];return data.days[date.value]}
-function quickAdd(){let s=quickFood.options[quickFood.selectedIndex];if(!s.dataset.cal)return;dayObj().foods.push({name:s.text,cal:+s.dataset.cal,pro:+s.dataset.pro});quickFood.value="";persist();renderFoods()}
-function addCustomFood(){let n=customFood.value.trim();if(!n)return;dayObj().foods.push({name:n,cal:customCal.value?+customCal.value:null,pro:customPro.value?+customPro.value:null});customFood.value=customCal.value=customPro.value="";persist();renderFoods()}
-function removeFood(i){dayObj().foods.splice(i,1);persist();renderFoods()}
-function renderFoods(){let f=(data.days[date.value]||{}).foods||[];foodList.innerHTML=f.length?'<table><tr><th>Food</th><th>Cal</th><th>Protein</th><th></th></tr>'+f.map((x,i)=>`<tr><td>${x.name}</td><td>${x.cal??"—"}</td><td>${x.pro!=null?x.pro+" g":"—"}</td><td><button onclick="removeFood(${i})">×</button></td></tr>`).join("")+"</table>":"<p class='small'>Nothing logged yet.</p>";let s=sumFoods(f);foodTotals.innerHTML=f.length?`<b>Automatic total:</b> ${Math.round(s.cal)} calories • ${s.pro.toFixed(1)} g protein<br><span class="small">Targets: 1,600–1,700 calories • 90–110 g protein</span>`:""}
+function todayISO(){const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+$("dateField").value=todayISO(); $("mdate").value=todayISO(); $("weekDate").value=todayISO();
 
-function saveMeasurement(){data.measurements.push({date:mdate.value,waist:waist.value,hips:hips.value,chest:chest.value});persist()}
-function saveWeek(){data.weeks.push({date:weekDate.value,fit:weekFit.value,worked:worked.value,hard:hard.value,next:nextSmall.value});persist();worked.value=hard.value=weekFit.value=nextSmall.value=""}
-function render(){
- let rows=Object.entries(data.days).filter(([d,x])=>x.weight).sort((a,b)=>b[0].localeCompare(a[0]));let cutoff=new Date();cutoff.setDate(cutoff.getDate()-6);let vals=rows.filter(([d,x])=>new Date(d+"T12:00:00")>=cutoff).map(([d,x])=>+x.weight);weeklyAverage.textContent=vals.length?`7-day average: ${(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1)} lb — the trend matters more than one day.`:"Add weigh-ins and your 7-day average will appear here.";
- history.innerHTML=rows.length?'<table><tr><th>Date</th><th>Weight</th><th>Puff</th></tr>'+rows.map(([d,x])=>`<tr><td>${d}</td><td>${x.weight} lb</td><td>${x.puff||"—"}</td></tr>`).join("")+"</table>":"<p class='small'>No weigh-ins saved yet.</p>";
- let latest=rows[0]?.[1]?.weight; if(latest){let pct=Math.max(0,Math.min(100,(190.8-latest)/(190.8-180)*100));bar.style.width=pct+"%";progressText.textContent=(190.8-latest).toFixed(1)+" lb down • "+Math.max(0,latest-180).toFixed(1)+" lb to 180";} else progressText.textContent="Add your first weigh-in.";
- measurements.innerHTML=data.measurements.length?'<table><tr><th>Date</th><th>Waist</th></tr>'+data.measurements.slice().reverse().map(x=>`<tr><td>${x.date}</td><td>${x.waist||"—"}</td></tr>`).join("")+"</table>":"";
- weeks.innerHTML=data.weeks.length?data.weeks.slice().reverse().map(x=>`<div style="margin-top:12px"><b>${x.date}</b><div class="small">Worked: ${x.worked||"—"}<br>Hard: ${x.hard||"—"}<br>Next small step: ${x.next||"—"}</div></div>`).join(""):"";
- let now=new Date(), start=new Date(now);start.setDate(now.getDate()-6);let t=0,tc=0,s=0;Object.entries(data.days).forEach(([d,x])=>{let q=new Date(d+"T12:00:00");if(q>=start&&q<=now){t+=+(x.target||0);tc+=+(x.taichi||0);s+=x.strength?1:0}});
- activitySummary.innerHTML=`<div class="grid"><div><span class="small">Target hours</span><div class="metric">${t}</div></div><div><span class="small">Tai Chi minutes</span><div class="metric">${tc}</div></div><div><span class="small">Strength sessions</span><div class="metric">${s}</div></div></div>`;
+function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data)); renderAll()}
+function currentDate(){return $("dateField").value}
+function currentDay(){const d=currentDate(); if(!data.days[d])data.days[d]={foods:[]}; if(!Array.isArray(data.days[d].foods))data.days[d].foods=[]; return data.days[d]}
+const dayFields=["weight","water","puff","sleep","stress","taichi","target","notes","strength","waterGoal","veg","kind"];
+
+function switchTab(target){
+ document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active",el.id===target));
+ document.querySelectorAll("#tabs button").forEach(btn=>btn.classList.toggle("active",btn.dataset.target===target));
+ renderAll();
+ window.scrollTo({top:document.querySelector("nav").offsetTop,behavior:"smooth"});
 }
-function exportData(){let b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="road-to-180-backup.json";a.click()}
-function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);persist();alert("Backup restored ✓")}catch{alert("That backup could not be read.")}};r.readAsText(f)}
-document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button,.tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.tab).classList.add("active");render()});
-renderFoods();setEncouragement();render();
-if("serviceWorker" in navigator)navigator.serviceWorker.register("./service-worker.js");
+document.querySelectorAll("#tabs button").forEach(btn=>{
+ btn.addEventListener("click",function(e){e.preventDefault(); switchTab(this.dataset.target)});
+ btn.addEventListener("touchend",function(e){e.preventDefault(); switchTab(this.dataset.target)},{passive:false});
+});
+
+function loadDay(){
+ const x=data.days[currentDate()]||{};
+ dayFields.forEach(id=>{const e=$(id); if(e.type==="checkbox")e.checked=!!x[id]; else e.value=x[id]??""});
+ renderFoods(); setEncouragement();
+}
+$("dateField").addEventListener("change",loadDay);
+
+function saveDay(){
+ const old=currentDay(), x={foods:old.foods||[]};
+ dayFields.forEach(id=>{const e=$(id); x[id]=e.type==="checkbox"?e.checked:e.value});
+ const sums=sumFoods(x.foods); x.calories=sums.cal; x.protein=sums.pro;
+ data.days[currentDate()]=x; persist(); setEncouragement();
+ alert("Saved ✓  Small steps count.");
+}
+$("saveDayBtn").addEventListener("click",saveDay);
+
+function sumFoods(f){return {cal:f.filter(x=>x.cal!=null).reduce((a,x)=>a+(+x.cal||0),0),pro:f.filter(x=>x.pro!=null).reduce((a,x)=>a+(+x.pro||0),0),known:f.filter(x=>x.cal!=null).length}}
+
+function quickAdd(){
+ const s=$("quickFood").options[$("quickFood").selectedIndex];
+ if(!s || !s.dataset.cal)return;
+ currentDay().foods.push({name:s.text,cal:+s.dataset.cal,pro:+s.dataset.pro});
+ $("quickFood").value=""; persist(); renderFoods(); setEncouragement();
+}
+$("quickAddBtn").addEventListener("click",quickAdd);
+
+function addCustom(){
+ const n=$("customFood").value.trim(); if(!n)return;
+ currentDay().foods.push({name:n,cal:$("customCal").value?+$("customCal").value:null,pro:$("customPro").value?+$("customPro").value:null});
+ $("customFood").value=""; $("customCal").value=""; $("customPro").value="";
+ persist(); renderFoods(); setEncouragement();
+}
+$("customAddBtn").addEventListener("click",addCustom);
+
+window.removeFood=function(i){currentDay().foods.splice(i,1); persist(); renderFoods(); setEncouragement()}
+
+function renderFoods(){
+ const f=(data.days[currentDate()]||{}).foods||[];
+ $("foodList").innerHTML=f.length?'<table><tr><th>Food</th><th>Cal</th><th>Protein</th><th></th></tr>'+f.map((x,i)=>`<tr><td>${x.name}</td><td>${x.cal??"—"}</td><td>${x.pro!=null?x.pro+" g":"—"}</td><td><button type="button" onclick="removeFood(${i})">×</button></td></tr>`).join("")+"</table>":"<p class='small'>Nothing logged yet.</p>";
+ const s=sumFoods(f);
+ $("calTotal").innerHTML=Math.round(s.cal)+(s.known<f.length?' <span class="small">+ unestimated</span>':'');
+ $("proTotal").textContent=s.pro.toFixed(1)+" g";
+}
+
+const baseEnc=[
+"Small steps count. You only need the next helpful choice.",
+"Progress, not perfection. Ordinary days are where this gets built.",
+"Stressful weeks need simpler plans, not stricter ones.",
+"A meal out does not undo your progress. Enjoy it, log it, keep going.",
+"Missing yesterday doesn't matter. You're here today.",
+"You are doing hard things. Give yourself credit for showing up."
+];
+function setEncouragement(){
+ const x=data.days[currentDate()]||{}, f=x.foods||[], s=sumFoods(f); let msg="";
+ if(+x.target>=4) msg="That Target shift was real movement. You do not owe anyone an extra workout tonight.";
+ else if(+x.stress>=4) msg="High-stress day: make the plan smaller, not harsher. One helpful choice is enough.";
+ else if(s.pro>=90) msg="You hit your protein target — that's a strong little win.";
+ else if(+x.water>=8) msg="Water goal reached. Quiet consistency counts.";
+ else if(f.length>=3) msg="You kept logging your day instead of chasing perfection. That's exactly how this works.";
+ else {const seed=[...currentDate()].reduce((a,c)=>a+c.charCodeAt(0),0); msg=baseEnc[seed%baseEnc.length]}
+ $("encouragement").textContent=msg;
+}
+
+$("saveMeasurementBtn").addEventListener("click",()=>{data.measurements.push({date:$("mdate").value,waist:$("waist").value,hips:$("hips").value,chest:$("chest").value}); persist()});
+$("saveWeekBtn").addEventListener("click",()=>{data.weeks.push({date:$("weekDate").value,fit:$("weekFit").value,worked:$("worked").value,hard:$("hard").value,next:$("nextSmall").value}); persist(); ["weekFit","worked","hard","nextSmall"].forEach(id=>$(id).value="")});
+
+function weeklyAvg(rows){
+ const now=new Date(),start=new Date(now);start.setDate(now.getDate()-6);
+ const vals=rows.filter(([d,x])=>{const q=new Date(d+"T12:00:00");return q>=start&&q<=now&&x.weight}).map(([d,x])=>+x.weight);
+ return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null
+}
+function renderAll(){
+ const rows=Object.entries(data.days).filter(([d,x])=>x.weight).sort((a,b)=>b[0].localeCompare(a[0]));
+ $("history").innerHTML=rows.length?'<table><tr><th>Date</th><th>Weight</th><th>Puff</th><th>Sleep</th></tr>'+rows.map(([d,x])=>`<tr><td>${d}</td><td>${x.weight} lb</td><td>${x.puff||"—"}</td><td>${x.sleep||"—"}</td></tr>`).join("")+"</table>":"<p class='small'>No weigh-ins saved yet.</p>";
+ const latest=rows[0]?.[1]?.weight;
+ if(latest){const pct=Math.max(0,Math.min(100,(190.8-latest)/(190.8-180)*100)); $("bar").style.width=pct+"%"; $("progressText").textContent=(190.8-latest).toFixed(1)+" lb down • "+Math.max(0,latest-180).toFixed(1)+" lb to 180"} else $("progressText").textContent="Add your first weigh-in.";
+ const avg=weeklyAvg(rows); $("weeklyAverage").textContent=avg?`Your 7-day average is ${avg.toFixed(1)} lb. The trend matters more than one day's number.`:"Add weigh-ins during the week and your 7-day average will appear here.";
+ $("measurements").innerHTML=data.measurements.length?'<table><tr><th>Date</th><th>Waist</th></tr>'+data.measurements.slice().reverse().map(x=>`<tr><td>${x.date}</td><td>${x.waist||"—"}</td></tr>`).join("")+"</table>":"";
+ $("weeks").innerHTML=data.weeks.length?data.weeks.slice().reverse().map(x=>`<div style="margin-top:14px"><b>${x.date}</b><div class="small">Worked: ${x.worked||"—"}<br>Hard: ${x.hard||"—"}<br>Next small step: ${x.next||"—"}</div></div>`).join(""):"";
+ const now=new Date(),start=new Date(now);start.setDate(now.getDate()-6);let t=0,tc=0,st=0;
+ Object.entries(data.days).forEach(([d,x])=>{const q=new Date(d+"T12:00:00");if(q>=start&&q<=now){t+=+(x.target||0);tc+=+(x.taichi||0);st+=x.strength?1:0}});
+ $("activitySummary").innerHTML=`<div class="grid"><div><span class="small">Target hours</span><div class="metric">${t}</div></div><div><span class="small">Tai Chi minutes</span><div class="metric">${tc}</div></div><div><span class="small">Strength sessions</span><div class="metric">${st}</div></div></div>`;
+ renderFoods(); setEncouragement();
+}
+
+$("exportBtn").addEventListener("click",()=>{const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="road-to-180-backup.json";a.click()});
+$("importFile").addEventListener("change",e=>{const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{try{data=JSON.parse(r.result);persist();loadDay();alert("Backup restored ✓")}catch(err){alert("That backup could not be read.")}}; r.readAsText(f)});
+
+loadDay(); renderAll();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}))}
+})();
 </script>
-</body></html>
+</body>
+</html>
